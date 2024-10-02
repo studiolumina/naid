@@ -1,0 +1,16 @@
+<header>
+    <div class="border-x-1 border-x-gray-200 grid place-center text-balance text-center py-24 wrapper mx-auto p-12.5">
+        <slot/>
+    </div>
+</header>
+<style>
+    header > * {
+        --opacity: 0.75;
+        --gray: rgb(229 231 235 / var(--opacity)); /* gray-200 */
+        background-image: linear-gradient(to right, var(--gray) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--gray) 1px, transparent 1px);
+        background-repeat: repeat;
+        background-position: -10px -10px;
+        background-size: 20px 20px;
+    }
+</style>
