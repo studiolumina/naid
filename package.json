@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.15.10",
     "@astrojs/check": "^0.9.3",
+    "astro": "^4.15.10",
+    "astro-icon": "^1.1.1",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.63.1",
+    "unocss": "^0.63.1"
   }
 }
