@@ -1,0 +1,14 @@
+---
+interface Props {
+    size?: 'sm'|'md'|'lg'|'xl'
+}
+
+// @unocss-include
+export const sizes = {
+    sm: 'py-8',
+    md: 'py-16',
+    lg: 'py-24',
+    xl: 'py-32'
+}
+---
+<div class:list={[sizes[Astro.props.size ?? 'md'], 'wrapper border-x-1 border-t-1 border-gray-200']}></div>

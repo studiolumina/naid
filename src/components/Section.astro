@@ -1,0 +1,62 @@
+---
+interface Props {
+    index?: boolean;
+    source?: string;
+    class?: string;
+    padBlock?: boolean;
+    variant?: 'dark'|'light';
+    variantInside?: 'dark'|'light';
+    fullWidthBorder?: boolean;
+}
+const { 
+    variant = 'light', 
+    variantInside = 'light', 
+    fullWidthBorder = false, 
+    index = false, 
+    source = false, 
+    class: _class = '', 
+    padBlock = true 
+} = Astro.props;
+---
+<section class:list={[
+        "section mx-auto flex flex-col", 
+        index && 'section--has-index', 
+        _class, 
+        variant, 
+        variant === 'dark' ? 'bg-gray-900 c-gray-200' : '',
+        fullWidthBorder ? 'border-t-1 border-gray-200' : ''
+    ]}>
+    <div class:list={[
+            "wrapper border-x-1 dark:border-gray-800 relative",
+            !fullWidthBorder ? 'border-t-1 border-gray-200' : '',
+            /* @unocss-include */
+            `${variantInside}-inside`,
+        ]}>
+        {index && <span class:list={[
+                "section--index",
+                /* the -1px is to offset the border width, I don't like it either but it works */
+                !fullWidthBorder ? 'border-t-1 border-gray-200 dark:border-gray-800 mt-[-1px]' : '',
+            ]}></span>}
+        {source && <span class="section--source">{source}</span>}
+        <div class:list={[padBlock && "py-12.5","content-container dark:bg-gray-900 dark:c-gray-200 dark-inside:bg-gray-900 dark-inside:c-gray-200"]}>
+            <slot />
+        </div>
+    </div>
+</section>
+<script>
+    let i = 0;
+    document.querySelectorAll('.section--has-index').forEach(section => {
+        section.querySelector('.section--index')!.textContent = ++i+'';
+    });
+</script>
+<style>
+    .content-container > :global(:not(hr, .ignore-content-container)) {
+        padding-inline: 3.125rem; /* 50px */
+    }
+    .content-container > :global(.inherit-content-container) {
+        padding-inline: 0;
+    }
+    .content-container > :global(.inherit-content-container) > :global(*) {
+        padding-inline: 3.125rem; /* 50px */
+    }
+</style>
