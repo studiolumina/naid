@@ -4,6 +4,11 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const navLinks = { 
+	"/":"Home",
+	"/blog":"Blog",
+	"/about":"About"
+}
 ---
 
 <!doctype html>
@@ -17,34 +22,18 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<nav class="border-b-1 border-b-gray-200">
+			<div class="flex items-center justify-between border-x-1 border-gray-200 pl-5 wrapper mx-auto">
+				<h1 class="font-mono text-xl">NAID</h1>
+				<ul class={`grid grid-auto-flow-col`}>
+					{Object.entries(navLinks).map(([href, title]) => {
+						return <li class="grid-col-[span_1] block">
+							<a href={href} class="text-sm px-5 py-8 tracking-0.1 block">{title}</a>
+						</li>
+					})}
+				</ul>
+			</div>
+		</nav>
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
