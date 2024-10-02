@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content'
+import GithubIcon from './GithubIcon.astro';
+import CountUp from './CountUp.astro';
+
+const projects = await getCollection('projects');
+
+type Props = typeof projects[0]['data'];
+
+const { title, subtitle, contributors, stars, repoUrl, logo = null, starsBy = 1, contributorsBy = 1 } = Astro.props;
+---
+<li class="grid grid-cols-subgrid grid-col-[1/-1] items-center c-gray-400 hover:c-black transition relative border-b-1 border-b-gray-200">
+    <div class="grid-col-[span_1] c-black border-r-1 border-r-gray-200 h-100% flex flex-col justify-center h-[100%] pl-12.5">
+        <small class="small">{subtitle}</small>
+        <h3 class="project-title">{title}</h3>
+    </div>
+    <div class="text-4 text-center border-r-1 border-r-gray-200 hidden grid-col-[span_1] h-100% md:flex flex-col justify-center h-[100%] px-12.5">
+        <CountUp by={contributorsBy} start={0} end={contributors} unit="+" class="font-mono text-5 fw-bold" />Contributors
+    </div>
+    <div class="text-4 text-center border-r-1 border-r-gray-200 hidden grid-col-[span_1] h-100% lg:flex flex-col justify-center h-[100%] px-12.5">
+        <CountUp by={starsBy} start={0} end={stars} unit="+" class="font-mono text-5 fw-bold" />Stars
+    </div>
+    <div class="grid-col-[span_1] justify-self-center flex flex-col justify-center h-100% h-[100%]">
+        <a href={repoUrl} class="text-10 md:text-17">
+            <GithubIcon />
+        </a>
+    </div>
+</li>
