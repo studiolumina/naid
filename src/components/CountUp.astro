@@ -1,0 +1,60 @@
+---
+interface Props {
+    start: number;
+    end: number;
+    unit: string;
+    by?: number;
+    class?: string;
+}
+const { start, end, unit, by = 1, class: _class } = Astro.props;
+const randId = 'countUp'+performance.now()
+---
+<span data-count-up id={randId} data-cu-by={by} data-cu-start={start} data-cu-end={end} data-cu-unit={unit} class={_class} style={`min-width: ${end.toString().length + (unit != null ? 2 : 1)}ex;`}>
+    {start}{unit}
+</span>
+<script>
+    const isInt = (n:number) => n % 1 === 0;
+    class Count {
+        start: number;
+        end: number;
+        unit: string;
+        by: number;
+        el:HTMLSpanElement;
+        constructor(el:HTMLSpanElement) {
+            this.el = el;
+            this.start = +el.dataset.cuStart!;
+            this.end = +el.dataset.cuEnd!;
+            this.unit = el.dataset.cuUnit!;
+            this.by = +el.dataset.cuBy!;
+        }
+
+        count(start:number = this.start) {
+            const nextValue = start + this.by;
+            const end = this.end;
+            if (start < end) {
+                this.el.textContent = ''+nextValue.toFixed(isInt(nextValue) ? 0 : 1)+this.unit;
+                requestAnimationFrame(() => this.count(nextValue));
+            }
+            
+        }
+    }
+
+    const CountUpMap = new Map<HTMLSpanElement, Count>();
+    
+    document.querySelectorAll<HTMLSpanElement>('[data-count-up]').forEach(el => CountUpMap.set(el, new Count(el)));
+
+    const io = new IntersectionObserver((entries, obs) => {
+        for (const entry of entries) {
+            if (entry.isIntersecting) {
+                CountUpMap.get(entry.target as HTMLSpanElement)?.count();
+                obs.unobserve(entry.target);
+            }
+        }
+    })
+    CountUpMap.keys().forEach(el => io.observe(el));
+</script>
+<style>
+    span {
+        font-variant-numeric: tabular-nums;
+    }
+</style>
