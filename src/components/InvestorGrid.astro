@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+
+const investors = await getCollection('investors');
+interface InvestorIndiv {
+    name: string;
+    type: 'major'|'minor';
+    logo?: string;
+    subtitle?: string;
+}
+const investorsReducedByType = investors.reduce((acc, { data }: { data: InvestorIndiv[] }) => {
+    data.forEach((investor) => {
+        acc[investor.type] = (acc[investor.type] || []).concat(investor);
+    });
+    return acc;
+}, {} as Record<InvestorIndiv['type'], InvestorIndiv[]>);
+
+---
+<ul class="place-center investor-grid relative ignore-content-container">
+    <li>
+        <small class="investor--label">Platinum Level</small>
+        <ul class="grid grid-cols-[repeat(2,1fr)] grid-auto-rows-[200px] border-t-dashed border-t-1 border-gray-200">
+            {investorsReducedByType.major.map(({ name, logo = false, subtitle = false }) => {
+                return <li class="grid-col-[1/-1] md:grid-col-[span_1] text-center py-12.5 lg:first:border-r-1 border-b-1 border-gray-200 grid place-content-center border-1 border-gray-200 m-[-0.5px]">
+                    <h3 class="text-xl">{name}</h3>
+                </li>
+            })}
+        </ul>
+    </li>
+    <li>
+        <small class="investor--label">Emerald Level</small>
+        <ul class="grid grid-cols-[repeat(2,1fr)] md:grid-cols-[repeat(3,1fr)] lg:grid-cols-[repeat(4,1fr)] grid-auto-rows-[200px] border-t-dashed border-t-1 border-gray-200">
+            {investorsReducedByType.minor.map(({ name, logo, subtitle }) => {
+                return <li class="grid-cols-[span_1] grid place-content-center p-10 border-1 border-gray-200 m-[-0.5px]">
+                    <h3 class="text-lg">{name}</h3>
+                    <smal class="small">{subtitle}</smal>
+                </li>
+            })}
+        </ul>
+    </li>
+</ul>
