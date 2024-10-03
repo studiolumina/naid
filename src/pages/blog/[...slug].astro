@@ -18,6 +18,7 @@ export const getStaticPaths = (async () => {
 
 const post = await getEntry('posts', Astro.params.slug)
 const author = await getEntry('authors', post.data.author.id);
+const { Content } = await post.render();
 ---
 <Layout title={post.data.title}>
     <Header>
@@ -27,7 +28,7 @@ const author = await getEntry('authors', post.data.author.id);
     </Header>
     <main>
         <Section source={`by ${author.data.name}`} fullWidthBorder>
-            {post.render()}
+            <Content />
         </Section>
     </main>
 </Layout>
