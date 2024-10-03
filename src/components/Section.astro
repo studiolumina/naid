@@ -7,6 +7,7 @@ interface Props {
     variant?: 'dark'|'light';
     variantInside?: 'dark'|'light';
     fullWidthBorder?: boolean;
+    as?: HTMLElementTagNameMap;
 }
 const { 
     variant = 'light', 
@@ -15,10 +16,11 @@ const {
     index = false, 
     source = false, 
     class: _class = '', 
-    padBlock = true 
+    padBlock = true,
+    as: Tag = 'section'
 } = Astro.props;
 ---
-<section class:list={[
+<Tag class:list={[
         "section mx-auto flex flex-col", 
         index && 'section--has-index', 
         _class, 
@@ -42,7 +44,7 @@ const {
             <slot />
         </div>
     </div>
-</section>
+</Tag>
 <script>
     let i = 0;
     document.querySelectorAll('.section--has-index').forEach(section => {
@@ -50,7 +52,7 @@ const {
     });
 </script>
 <style>
-    .content-container > :global(:not(hr, .ignore-content-container)) {
+    .content-container > :global(:not(hr, .ignore-content-container, .section)) {
         padding-inline: 3.125rem; /* 50px */
     }
     .content-container > :global(.inherit-content-container) {

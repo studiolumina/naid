@@ -14,7 +14,7 @@ const projects = await getCollection('projects');
 
 <Layout title="Welcome to Astro.">
 	<Header gridBg>
-		<small class="small">Delivered in <CountUp start={0} end={24} unit='ms'></CountUp></small>
+		<small class="small">can you believe this text is so small?</small>
 		<h2 class="text-20 leading-20"><span class="font-mono">NAID</span> - A template for doers</h2>
 		<p class="subtitle w-50% mx-auto mt-5">A short manifesto about how this project is going to change the world.</p>
 	</Header>
@@ -25,14 +25,14 @@ const projects = await getCollection('projects');
 			<ul class="my-5 project-list ignore-content-container border-y-1 border-y-gray-200 border-y-dotted">
 				{projects.map((proj: any) => <ProjectCard {...proj.data} />)}
 			</ul>
-			<div class="grid grid-cols-[1fr_100px] py-12.5">
+			<div class="grid grid-cols-[1fr_250px] py-12.5">
 				<div class="grid-col-1 pr-12.5">
 					<h3 class="mb-3 project-title">Mission</h3>
 					<p class="subtitle-small">Another pithy statement about the nature of these projects. Talk more about how they're beneficial to all developers/users and really underline how helpful they are in improving DX/UX.</p>
 				</div>
 				<div class="font-mono">
-					<small>$ cmd to run</small>
-					<small>Results: in <CountUp start={0} end={34} unit="ms" /></small>
+					<small>$ cmd to run</small><br/><br/>
+					<small>{'{An animation of some kind.}'}</small>
 				</div>
 			</div>
 		</Section>
@@ -64,7 +64,12 @@ const projects = await getCollection('projects');
 		</Section>
 		<SectionSpacer />
 		<Section index source="Component.framework" fullWidthBorder variantInside="dark">
-			<h2 class="font-bold c-gray-800 dark:c-gray-100">Interested in this theme? Like the look of it and need more in your life?<br/><span class="c-gray-500 dark:c-gray-300">We know! It's pretty great.</span></h2>
+			<div class="grid grid-cols-[4fr_1fr] place-items-center">
+				<h2 class="title text-8 leading-8 font-bold c-gray-800 dark:c-gray-100">Interested in this theme? Like the look of it and need more in your life?<br/><span class="c-gray-500 dark:c-gray-300 text-[0.9em]">We know! It's pretty great.</span></h2>
+				<div>
+					<a href="https://github.com/studiolumina/naid" class="bg-gray-800 c-gray-200 text-7 text-center py-3 px-5">Repo</a>
+				</div>
+			</div>
 		</Section>
 	</main>
 </Layout>
