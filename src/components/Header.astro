@@ -1,10 +1,17 @@
+---
+interface Props {
+    gridBg?: boolean;
+
+}
+const { gridBg = false } = Astro.props;
+---
 <header>
-    <div class="border-x-1 border-x-gray-200 grid place-center text-balance text-center py-24 wrapper mx-auto p-12.5">
+    <div class:list={[gridBg ? 'grid-bg' : '', "border-x-1 border-x-gray-200 grid place-content-center text-balance text-center py-24 wrapper mx-auto p-12.5 relative"]}>
         <slot/>
     </div>
 </header>
 <style>
-    header > * {
+    header > .grid-bg {
         --opacity: 0.75;
         --gray: rgb(229 231 235 / var(--opacity)); /* gray-200 */
         background-image: linear-gradient(to right, var(--gray) 1px, transparent 1px),

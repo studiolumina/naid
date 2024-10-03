@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/Footer.astro';
+import { SITE_NAME } from '../consts';
 
 interface Props {
 	title: string;
@@ -19,9 +20,9 @@ const navLinks = {
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="100px" width="100px"><text y=".9em" font-size="90">0️⃣</text></svg>' />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{title || SITE_NAME}</title>
 	</head>
 	<body>
 		<nav class="border-b-1 border-b-gray-200">
@@ -40,3 +41,48 @@ const navLinks = {
 		<Footer />
 	</body>
 </html>
+<style is:global>
+	html,
+	body {
+		height: 100%;
+		min-height: 100vh;
+	}
+	body {
+		display: flex;
+		flex-flow: column;
+	}
+	body > main {
+		flex: 1;
+	}
+	.content-wrapper {
+        :is(h2,h3,h4,h5,h6) {
+            font-weight: 600;
+            margin-top: 1ex;
+        }
+        p {
+            margin-top: 1ex;
+        }
+        h2 {
+            font-size: 1.875rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+        }
+        h4 {
+            font-size: 1.35rem;
+        }
+        h5, h6 {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+		ul {
+			list-style-type:square;
+			list-style-position: inside;
+			margin-top: 1ex;
+		}
+		pre {
+			margin-top: 1ex;
+			padding-block: 1.5rem;
+		}
+    }
+</style>

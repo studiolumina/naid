@@ -10,20 +10,18 @@ import StatsGrid from '../components/StatsGrid.astro';
 import InvestorGrid from '../components/InvestorGrid.astro';
 
 const projects = await getCollection('projects');
-const usingLogos = false;
 ---
 
 <Layout title="Welcome to Astro.">
-	<Header>
+	<Header gridBg>
 		<small class="small">Delivered in <CountUp start={0} end={24} unit='ms'></CountUp></small>
-		<h2 class="text-20 leading-20">Testing the template of the future</h2>
+		<h2 class="text-20 leading-20"><span class="font-mono">NAID</span> - A template for doers</h2>
 		<p class="subtitle w-50% mx-auto mt-5">A short manifesto about how this project is going to change the world.</p>
 	</Header>
 	<main>
 		<Section index source="projects.json" fullWidthBorder>
 			<h2 class="title">Projects</h2>
 			<p class="subtitle-small">A short blurb about the projects you are deciding to list here and what they are about. Make it pithy and worth investing in.</p>
-			<!-- if usingLogos is true, add a `1fr_` before the 2fr in the ul below -->
 			<ul class="my-5 project-list ignore-content-container border-y-1 border-y-gray-200 border-y-dotted">
 				{projects.map((proj: any) => <ProjectCard {...proj.data} />)}
 			</ul>
@@ -32,9 +30,9 @@ const usingLogos = false;
 					<h3 class="mb-3 project-title">Mission</h3>
 					<p class="subtitle-small">Another pithy statement about the nature of these projects. Talk more about how they're beneficial to all developers/users and really underline how helpful they are in improving DX/UX.</p>
 				</div>
-				<div>
-					<small class="font-mono">$ cmd to run</small>
-					<small class="font-mono">Results: in <CountUp class="font-mono" start={0} end={34} unit="ms" /></small>
+				<div class="font-mono">
+					<small>$ cmd to run</small>
+					<small>Results: in <CountUp start={0} end={34} unit="ms" /></small>
 				</div>
 			</div>
 		</Section>

@@ -1,7 +1,7 @@
-# Astro Starter Kit: Basics
+# `NAID` - A template for doers
 
 ```sh
-npm create astro@latest -- --template basics
+npm create astro@latest -- --template studiolumina/naid
 ```
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
@@ -21,6 +21,7 @@ Inside of your Astro project, you'll see the following folders and files:
 ├── public/
 │   └── favicon.svg
 ├── src/
+|   ├── content/
 │   ├── components/
 │   │   └── Card.astro
 │   ├── layouts/
@@ -48,7 +49,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
