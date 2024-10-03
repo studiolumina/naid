@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Section from "../../components/Section.astro";
+import { getCollection, getEntry } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const title = "Your companies blog"
+const subtitle = "This is where your company can post things that will then be read by users or potential customers!"
+
+const posts = await getCollection('posts');
+---
+<Layout title={title}>
+    <Header>
+        <h1 class="text-20 leading-20">{title}</h1>
+        <h2 class="text-16 leading-16 c-gray-600">{subtitle}</h2>
+    </Header>
+    <main>
+        <Section fullWidthBorder>
+            <ul class="ignore-content-container">
+                {posts.map(async ({ slug, data }) => {
+                    const author = await getEntry('authors', data.author.id);
+                    return <li>
+                        <article class="relative p-12.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                            <h2 class="title">{data.title}</h2>
+                            <FormattedDate date={data.pubDate} /><br/>
+                            {data.description && <p class="subtitle">{data.description}</p>}
+                            <small class="small">Written by {author.data.name}</small>
+                            <a href={`/blog/${slug}`} class="after:content-[''] after:absolute after:inset-0">
+                                <span class="sr-only">Read the {data.type} {data.title}</span>
+                            </a>
+                        </article>
+                    </li>
+                })}
+            </ul>
+        </Section>
+    </main>
+</Layout>
