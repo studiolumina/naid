@@ -1,0 +1,10 @@
+---
+import { SITE_NAME } from '../consts';
+const now = new Date();
+const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric' });
+---
+<footer class="py-6.25 border-t-1 border-gray-200 c-gray-600 grid place-content-center gap-[1ch] grid-cols-[repeat(3,auto)]">
+    <span class="grid-col-[span_1]">&copy; {formatter.format(now)} {SITE_NAME}</span>
+    <span class="grid-col-[span_1]">&mdash;</span>
+    <span class="grid-col-[span_1]">Made with :heart: in :city:</span>
+</footer>
