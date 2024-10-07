@@ -19,7 +19,6 @@ export default defineConfig({
             if (!matcher.startsWith('dark-inside:')) {
                 return matcher;
             } else {
-                console.log(matcher);
                 return {
                     matcher: matcher.slice(12),
                     selector: (s) => `.dark-inside ${s}`
