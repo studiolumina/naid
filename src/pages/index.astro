@@ -25,7 +25,7 @@ const projects = await getCollection('projects');
 			<ul class="my-5 project-list ignore-content-container border-y-1 border-y-gray-200 border-y-dotted">
 				{projects.map((proj: any) => <ProjectCard {...proj.data} />)}
 			</ul>
-			<div class="grid grid-cols-[1fr_250px] py-12.5">
+			<div class="grid md:grid-cols-[1fr_250px] py-12.5">
 				<div class="grid-col-1 pr-12.5">
 					<h3 class="mb-3 project-title">Mission</h3>
 					<p class="subtitle-small">Another pithy statement about the nature of these projects. Talk more about how they're beneficial to all developers/users and really underline how helpful they are in improving DX/UX.</p>
