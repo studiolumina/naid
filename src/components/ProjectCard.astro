@@ -9,7 +9,7 @@ type Props = typeof projects[0]['data'];
 
 const { title, subtitle, contributors, stars, repoUrl, logo = null, starsBy = 1, contributorsBy = 1 } = Astro.props;
 ---
-<li class="grid grid-cols-subgrid grid-col-[1/-1] items-center c-gray-400 hover:c-black transition relative border-b-1 border-b-gray-200">
+<li class="grid grid-cols-subgrid grid-col-[1/-1] items-center c-gray-600 hover:c-black transition relative border-b-1 border-b-gray-200">
     <div class="grid-col-[span_1] c-black border-r-1 border-r-gray-200 h-100% flex flex-col justify-center h-[100%] pl-12.5">
         <small class="small">{subtitle}</small>
         <h3 class="project-title">{title}</h3>
