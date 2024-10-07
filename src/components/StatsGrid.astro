@@ -10,7 +10,7 @@ interface Props {
 const stats = await getEntry('stats', Astro.props.entryName);
 ---
 <Section class="py-0" padBlock={false}>
-    <ul class="inherit-content-container grid grid-cols-[repeat(3,1fr)] grid-auto-rows-[200px] place-center">
+    <ul class="inherit-content-container grid lg:grid-cols-[repeat(3,1fr)] grid-auto-rows-[200px] place-center">
         {stats?.data.map(({ title, value, unit, by }) => <li class="flex flex-col justify-center text-center border-r-1 border-r-gray-200 last:border-r-0">
             <CountUp class="text-10 font-mono" start={0} end={value} unit={unit} by={by} />
             <p class="text-md">{title}</p>
