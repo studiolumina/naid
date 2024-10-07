@@ -23,6 +23,9 @@ const { title, subtitle, contributors, stars, repoUrl, logo = null, starsBy = 1,
     <div class="grid-col-[span_1] justify-self-center flex flex-col justify-center h-100% h-[100%]">
         <a href={repoUrl} class="text-10 md:text-17">
             <GithubIcon />
+            <div class="sr-only">
+                Visit the repo for our {title} project
+            </div>
         </a>
     </div>
 </li>
