@@ -1,0 +1,40 @@
+---
+/**
+ * DO NOT COMMIT YET
+ * @TODO find a component library to handle this
+ */
+const modes = ['light','dark'];
+let activeMode = Astro.cookies.get('mode')?.value;
+if (modes.indexOf(activeMode as string) === -1) {
+    activeMode = modes[0];
+}
+---
+<button data-c="modeToggle" data-mode={activeMode} class:list={[activeMode]}>
+    <span class="dark:hidden light:block">☀️</span>
+    <span class="dark:block light:hidden">🌙</span>
+</button>
+<script>
+    const toggle = () => {
+        let currentMode = Astro.cookies.get('mode')?.value;
+        let nextMode = currentMode === 'light' ? 'dark' : 'light';
+        const toggles = document.querySelectorAll('[data-c="modeToggle"]');
+        if (!currentMode) {
+            toggles.forEach(el => (el.classList.remove('dark'), el.classList.add('light')));
+            Astro.cookies.set('mode', 'light');
+            currentMode = 'light';
+        } else {
+            
+            Astro.cookies.set('mode', currentMode === 'light' ? 'dark' : 'light');
+            // toggles.forEach()
+        }
+    }
+    
+    document.addEventListener('click', ({ target }) => {
+        const btn = (target as HTMLElement).closest('[data-c="modeToggle"]');
+        if (!btn) return;
+
+        btn.classList.toggle('light', !btn.classList.contains('light'));
+        btn.classList.toggle('dark', !btn.classList.contains('dark'));
+        // Astro.cookies.set('mode',)
+    })
+</script>
